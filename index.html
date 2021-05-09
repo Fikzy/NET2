@@ -21,6 +21,7 @@
 <li><a href="#collisions">Collisions</a></li>
 </ol>
 </li>
+<li><a href="#final-results">Final results</a></li>
 <li><a href="#references">References</a></li>
 </ol>
 <h2 id="euler-integration">Euler Integration</h2>
@@ -54,7 +55,7 @@ L’utilisation de la méthode de Verlet rend cette implémentation relativement
 <h3 id="stick-constraint">Stick Constraint</h3>
 <p>La contrainte la plus basique est la “stick constraint” ou contrainte bâton. Elle va nous permettre de construire tout type de formes géométriques.<br>
 Celle-ci consiste à enforcer la conservation d’une distance initiale entre deux particules.</p>
-<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/589b7d49e166840acaa2c13276db705a461490d3/stick_constraint.svg" alt="stick_constraint"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/589b7d49e166840acaa2c13276db705a461490d3/stick_constraint.svg" alt="stick constraint diagram"></p>
 <p>Pour satisfaire cette contrainte, il suffit alors d’ajouter le décalage nécessaire afin de rapprocher ou d’éloigner les deux particules.</p>
 <pre><code>delta = p2 - p1
 delta_length = sqrt(dot(delta, delta))
@@ -63,10 +64,10 @@ p1 -= delta * ratio / 2
 p2 += delta * ratio / 2
 </code></pre>
 <p>Voici un rendu d’une simple contrainte entre deux particules : un joli bâton !<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/stick_constraint.gif" alt="enter image description here" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/stick_constraint.gif" alt="stick gif" width="400" height="400"></p>
 <p>L’avantage de cette approche que l’on constate immédiatement est qu’aucun traitement particulier n’est nécessaire pour la rotation d’objets !</p>
 <p>Comme dit précédemment, avec ce type de contrainte, nous sommes en mesure de créer des formes géométriques.<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/squishy_triangle.gif" alt="enter image description here" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/squishy_triangle.gif" alt="soft triangle gif" width="400" height="400"></p>
 <p>Cependant ici quelque chose ne va pas. La pièce ne semble pas rigide.</p>
 <p>Le soucis est que les contraintes ne sont pas résolues assez rapidement, ce qui donne cette impression de “mou”. Pour contrer ce problème, il suffit alors de résoudre les contraintes plusieurs fois par itération. Cela a évidemment un coût, mais en général un petit nombre d’itérations suffit amplement.</p>
 <pre><code>update()
@@ -75,12 +76,27 @@ p2 += delta * ratio / 2
 		resolveConstraints()
 </code></pre>
 <p>Voici le même triangle, avec 3 itérations pour la résolution de contraintes :<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle.gif" alt="enter image description here" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle.gif" alt="rigid triangle gif" width="400" height="400"></p>
 <p>Voici un cas plus complexe parfaitement supporté : une chaîne !<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/chain.gif" alt="enter image description here" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/chain.gif" alt="chain gif" width="400" height="400"></p>
 <h3 id="collisions">Collisions</h3>
-<p>Hum Houston, il y a un petit problème là je crois…</p>
-<p>Cette méthode n’est pas non plus magique, il faut gérer la collision !</p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/no_collision.gif" alt="no collision gif" width="400" height="400"><br>
+Hum Houston, il y a un petit problème là je crois…</p>
+<p>Cette méthode n’est pas non plus magique, il faut gérer la collision entre objets !<br>
+Pour ce faire, il faut permettre aux arrêtes d’interagir avec les particules des autres objets.</p>
+<p>Pour mieux comprendre, voici un schéma de la situation :<br>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/collision.svg" alt="collision diagram" width="600" height="200"></p>
+<p>Pour résoudre la collision, on pourrait simplement faire remonter l’intégralité du bâton de la distance de pénétration. Cependant cela ne donnera pas un résultat satisfaisant car l’objet ne tournerai pas.</p>
+<p>Pour obtenir un résultat réaliste, il faut déplacer les deux particules de notre arrête <strong>x1</strong> et <strong>x2</strong> de manière à ce que le point <strong>p</strong> coïncide avec le point <strong>q</strong>.</p>
+<p>Avec la magie des maths, il est possible de résoudre ce système afin d’obtenir les nouvelles coordonnées de <strong>x1</strong> et <strong>x2</strong>.<br>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/collision_resolved.svg" alt="collision resolved diagram" width="600" height="200"></p>
+<p>Et après plusieurs heures à set taper contre un mur : TADA !<br>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle_collision.gif" alt="triangle collision gif" width="400" height="400"></p>
+<h3 id="final-results">Final results</h3>
+<p>Après l’ajout d’un simple système d’interaction avec les objets, les choses deviennent d’autant plus amusantes.</p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_1.gif" alt="sandbox 1 gif" width="400" height="400"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="400" height="400"></p>
+<p>Les possibilités sont infinies. D’autres types de contraintes existent. Je vous recommande fortement d’essayer par vous même si cela vous a plu !</p>
 <h2 id="references">References</h2>
 <blockquote>
 <p><a href="https://www.cs.cmu.edu/afs/cs/academic/class/15462-s13/www/lec_slides/Jakobsen.pdf">https://www.cs.cmu.edu/afs/cs/academic/class/15462-s13/www/lec_slides/Jakobsen.pdf</a></p>
