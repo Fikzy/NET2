@@ -170,9 +170,9 @@ Le facteur <strong>t2</strong> représente représente la position du point d’
 penetration_ratio = 1 - t1
 peneration = normal * penetration_ratio
 
-p2 += peneration
-q1 -= peneration * (1 - t2)
-q2 -= peneration * t2
+p2 += peneration * 0.5
+q1 -= peneration * 0.5 * (1 - t2)
+q2 -= peneration * 0.5 * t2
 </code></pre>
 <p>Et après plusieurs heures à se taper la tête contre un mur : TADA !</p>
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle_collision.gif" alt="triangle collision gif" width="400" height="400"></p>
@@ -183,7 +183,7 @@ q2 -= peneration * t2
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="400" height="400"></p>
 <p>Les possibilités sont infinies. D’autres types de contraintes existent. Je vous recommande fortement d’essayer par vous même si cela vous a plu !</p>
 <h2 id="outils-utilisés">Outils utilisés</h2>
-<p><a href="#https://processing.org/">Processing</a> est un logiciel ainsi qu’un langage (basé sur Java) qui rend la création de contenu graphique extrêmement simple, ce fut donc un choix parfait pour ce petit projet.</p>
+<p>J’ai utilisé <a href="#https://processing.org/">Processing</a> pour ce projet. C’est un logiciel ainsi qu’un langage (basé sur Java) qui rend la création de contenu graphique extrêmement simple, ce fut donc un choix parfait pour ce petit projet !</p>
 <p><a id="references"></a><a></a></p>
 <h2 id="références">Références</h2>
 <p><em>Verlet integration</em><br>
