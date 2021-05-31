@@ -28,7 +28,7 @@
 </ol>
 </li>
 <li><a href="#final-results">Résultats finaux</a></li>
-<li><a href="#tools">Outil utilisé</a></li>
+<li><a href="#tools">Outils utilisés</a></li>
 <li><a href="#references">Références</a></li>
 </ol>
 <p><a id="euler-integration"></a><a></a></p>
@@ -48,8 +48,8 @@
 <h2 id="intégration-de-verlet">Intégration de Verlet</h2>
 <p>L’intégration de Verlet consiste à déduire la nouvelle position à partir de la position actuelle et de la position précédente (donc la vélocité indirectement).</p>
 <pre><code>update()
-    new_pos = 2*pos - old_pos + acceleration * dt²
-    old_pos = pos
+	new_pos = 2*pos - old_pos + acceleration * dt²
+	old_pos = pos
 </code></pre>
 <p>La vélocité n’étant pas stockée en dur, le système est de facto plus stable.</p>
 <blockquote>
@@ -154,10 +154,10 @@ q1 et q2: particules formant le segment de la pièce n°2</p>
 
 do_line_intersect()
 
-    h = (q2.x - q1.x) * (p1.y - p2.y) - (p1.x - p2.x) * (q2.y - q1.y)
+	h = (q2.x - q1.x) * (p1.y - p2.y) - (p1.x - p2.x) * (q2.y - q1.y)
 	t1 = ((q1.y - q2.y) * (p1.x - q1.x) + (q2.x - q1.x) * (p1.y - q1.y)) / h
 	t2 = ((p1.y - p2.y) * (p1.x - q1.x) + (p2.x - p1.x) * (p1.y - q1.y)) / h
-	
+
 	return (t1 &gt;= 0.0f &amp;&amp; t1 &lt; 1.0f &amp;&amp; t2 &gt;= 0.0f &amp;&amp; t2 &lt; 1.0f):
 </code></pre>
 <p>Une fois les informations de la collision obtenues, il ne reste plus qu’à la résoudre !</p>
@@ -182,6 +182,7 @@ q2 -= peneration * 0.5 * t2
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_1.gif" alt="sandbox 1 gif" width="400" height="400"></p>
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="400" height="400"></p>
 <p>Les possibilités sont infinies. D’autres types de contraintes existent. Je vous recommande fortement d’essayer par vous même si cela vous a plu !</p>
+<p><a id="tools"></a><a></a></p>
 <h2 id="outils-utilisés">Outils utilisés</h2>
 <p>J’ai utilisé <a href="#https://processing.org/">Processing</a> pour ce projet. C’est un logiciel ainsi qu’un langage (basé sur Java) qui rend la création de contenu graphique extrêmement simple, ce fut donc un choix parfait pour ce petit projet !</p>
 <p><a id="references"></a><a></a></p>
