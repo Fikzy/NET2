@@ -10,7 +10,17 @@
 
 <body class="stackedit">
   <div class="stackedit__html"><h1 id="verlet-physics-engine">Verlet Physics Engine</h1>
-<h1 id="table-des-matières">Table des matières</h1>
+<h2 id="petite-mise-en-bouche">Petite mise en bouche</h2>
+
+<table>
+<thead>
+<tr>
+<th><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_3.gif" alt="sandbox_3"></th>
+<th><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_4.gif" alt="sandbox_4"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><h1 id="table-des-matières">Table des matières</h1>
 <ol>
 <li><a href="#euler-integration">Intégration d’Euler</a></li>
 <li><a href="#verlet-integration">Intégration de Verlet</a></li>
@@ -31,17 +41,7 @@
 <li><a href="#tools">Outils utilisés</a></li>
 <li><a href="#references">Références</a></li>
 </ol>
-<h2 id="petite-mise-en-bouche">Petite mise en bouche</h2>
-
-<table>
-<thead>
-<tr>
-<th><img src="http://archive.gamedev.net/images.gamedev.net/features/programming/verlet/sandbox_3.gif" alt="sandbox_3"></th>
-<th><img src="http://archive.gamedev.net/images.gamedev.net/features/programming/verlet/sandbox_4.gif" alt="sandbox_4"></th>
-</tr>
-</thead>
-<tbody></tbody>
-</table><p><a id="euler-integration"></a></p>
+<p><a id="euler-integration"></a></p>
 <h2 id="intégration-deuler">Intégration d’Euler</h2>
 <p>La majorité des moteurs de jeux qui offrent de l’interaction physique font appel à l’intégration d’Euler qui est une méthode numérique de résolution d’équations différentielles du premier ordre.</p>
 <p>L’implémentation rudimentaire consiste à, pour chaque objet, attribuer une position, vitesse et accélération, et à chaque itération de la simulation, ajouter la vitesse à la position et l’accélération à la vitesse.</p>
