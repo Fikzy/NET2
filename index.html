@@ -31,7 +31,7 @@
 <li><a href="#tools">Outils utilisés</a></li>
 <li><a href="#references">Références</a></li>
 </ol>
-<p><a id="euler-integration"></a><a></a></p>
+<p><a id="euler-integration"></a></p>
 <h2 id="intégration-deuler">Intégration d’Euler</h2>
 <p>La majorité des moteurs de jeux qui offrent de l’interaction physique font appel à l’intégration d’Euler qui est une méthode numérique de résolution d’équations différentielles du premier ordre.</p>
 <p>L’implémentation rudimentaire consiste à, pour chaque objet, attribuer une position, vitesse et accélération, et à chaque itération de la simulation, ajouter la vitesse à la position et l’accélération à la vitesse.</p>
@@ -44,7 +44,7 @@
 <p>Voici une comparaison des deux méthodes :<br>
 <img src="http://archive.gamedev.net/images.gamedev.net/features/programming/verlet/proj-test.png" alt="euler_vs_verlet"></p>
 <p>C’est pourquoi nous allons explorer l’implémentation d’un moteur physique faisant appel à l’intégration de Verlet.</p>
-<p><a id="verlet-integration"></a><a></a></p>
+<p><a id="verlet-integration"></a></p>
 <h2 id="intégration-de-verlet">Intégration de Verlet</h2>
 <p>L’intégration de Verlet consiste à déduire la nouvelle position à partir de la position actuelle et de la position précédente (donc la vélocité indirectement).</p>
 <pre><code>update()
@@ -55,16 +55,16 @@
 <blockquote>
 <p>Pour rendre les choses moins glissantes, il suffit d’ajouter un facteur de friction lors de la mise à jour de la position.</p>
 </blockquote>
-<p><a id="implementation"></a><a></a></p>
+<p><a id="implementation"></a></p>
 <h2 id="implémentation">Implémentation</h2>
-<p><a id="particle-system"></a><a></a></p>
+<p><a id="particle-system"></a></p>
 <h3 id="système-de-particule">Système de particule</h3>
 <p>Les moteurs de simulation physique utilisent un système de particules.<br>
 L’utilisation de la méthode de Verlet rend cette implémentation relativement simple.</p>
 <p>Voici un premier rendu avec le traçage d’une unique particule auquel on a appliqué de la gravité et une “vélocité” initiale. À noter que pour empêcher la particule de sortir de la zone, une simple contrainte [min, max] sur ses coordonnées suffit.<br>
 <img src="https://raw.githubusercontent.com/Fikzy/NET2/master/simple_particle.png" alt="simple_particle" width="400" height="400"></p>
 <p>Là où les choses deviennent intéressante, c’est lors de l’ajout de contraintes entre les particules.</p>
-<p><a id="stick-constraint"></a><a></a></p>
+<p><a id="stick-constraint"></a></p>
 <h3 id="contrainte-bâton">Contrainte bâton</h3>
 <p>La contrainte la plus basique est la “stick constraint” ou contrainte bâton. Elle va nous permettre de construire tout type de formes géométriques.<br>
 Celle-ci consiste à enforcer la conservation d’une distance initiale entre deux particules.</p>
@@ -81,7 +81,7 @@ p2 += delta * ratio / 2
 <p>L’avantage de cette approche que l’on constate immédiatement est qu’aucun traitement particulier n’est nécessaire pour la rotation !</p>
 <p>En mettant bout à bout plusieurs de ces contraintes : une chaîne !<br>
 <img src="https://raw.githubusercontent.com/Fikzy/NET2/master/chain.gif" alt="chain gif" width="400" height="400"></p>
-<p><a id="rigid-body"></a><a></a></p>
+<p><a id="rigid-body"></a></p>
 <h2 id="modèle-du-solide-indéformable-rigid-body">Modèle du solide indéformable (Rigid body)</h2>
 <p>Comme dit précédemment, avec ce type de contrainte, nous sommes en mesure de créer des formes géométriques.</p>
 <p>Pour ce faire, il est préférable de regrouper les différents points et contraintes qui constituent la pièce au sein d’un même objet, plus communément appelé “rigid body”.</p>
@@ -110,7 +110,7 @@ p2 += delta * ratio / 2
 <p>Pour obtenir l’illusion parfaite, il suffit alors de ne pas les afficher :<br>
 (nous pouvons ignorer les particules aussi au passage)<br>
 <img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes.gif" alt="final shapes gif" width="400" height="400"></p>
-<p><a id="collision"></a><a></a></p>
+<p><a id="collision"></a></p>
 <h3 id="collision">Collision</h3>
 <p>Hum Houston, il y a un petit problème là je crois…<br>
 <img src="https://raw.githubusercontent.com/Fikzy/NET2/master/no_collision.gif" alt="no collision gif" width="400" height="400"></p>
@@ -120,7 +120,7 @@ p2 += delta * ratio / 2
 Je me suis donc rabattu sur une méthode alternative qui semble fonctionner correctement, cependant celle-ci ne gère pas les formes convexes.</p>
 </blockquote>
 <p>La première étape pour la résolution de collision consiste d’abord à détecter ainsi que d’extraire des information de la collision.</p>
-<p><a id="collision-detection"></a><a></a></p>
+<p><a id="collision-detection"></a></p>
 <h4 id="détection-de-collision-méthode-des-diagonales">Détection de collision (Méthode des diagonales)</h4>
 <p>Il existe une multitude des méthodes de détection de collision 2D (AABB, SAT, etc.), cependant celles ci agissent sur une pièce dans son ensemble, ce qui ne se prête pas bien à notre implémentation faisant appel à un système de particules.</p>
 <p>C’est pourquoi j’ai déniché une méthode tierce, celle-ci ne semble pas avoir de nom concret, mais elle fait appel aux diagonales des pièces, j’y ferai donc référence sous le nom de “méthode des diagonales” désormais.</p>
@@ -161,7 +161,7 @@ do_line_intersect()
 	return (t1 &gt;= 0.0f &amp;&amp; t1 &lt; 1.0f &amp;&amp; t2 &gt;= 0.0f &amp;&amp; t2 &lt; 1.0f):
 </code></pre>
 <p>Une fois les informations de la collision obtenues, il ne reste plus qu’à la résoudre !</p>
-<p><a id="collision-solving"></a><a></a></p>
+<p><a id="collision-solving"></a></p>
 <h4 id="résolution-de-collision">Résolution de collision</h4>
 <p>À l’aide des facteurs <strong>t1</strong> et <strong>t2</strong> obtenus lors de la détection de collision, nous sommes en mesure de résoudre la collision en agissant sur les 3 particules en formant ces deux segments.</p>
 <p>Le facteur <strong>t1</strong> représente représente la position du point d’intersection le long de la diagonale de la pièce n°1. Celui-ci nous donne la profondeur de la collision <strong>(1 - t1)</strong>.<br>
@@ -176,16 +176,16 @@ q2 -= peneration * 0.5 * t2
 </code></pre>
 <p>Et après plusieurs heures à se taper la tête contre un mur : TADA !</p>
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle_collision.gif" alt="triangle collision gif" width="400" height="400"></p>
-<p><a id="final-results"></a><a></a></p>
+<p><a id="final-results"></a></p>
 <h3 id="résultats-finaux">Résultats finaux</h3>
 <p>Après l’ajout d’un simple système d’interaction avec les objets, les choses deviennent d’autant plus amusantes.</p>
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_1.gif" alt="sandbox 1 gif" width="400" height="400"></p>
 <p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="400" height="400"></p>
 <p>Les possibilités sont infinies. D’autres types de contraintes existent. Je vous recommande fortement d’essayer par vous même si cela vous a plu !</p>
-<p><a id="tools"></a><a></a></p>
+<p><a id="tools"></a></p>
 <h2 id="outils-utilisés">Outils utilisés</h2>
 <p>J’ai utilisé <a href="#https://processing.org/">Processing</a> pour ce projet. C’est un logiciel ainsi qu’un langage (basé sur Java) qui rend la création de contenu graphique extrêmement simple, ce fut donc un choix parfait pour ce petit projet !</p>
-<p><a id="references"></a><a></a></p>
+<p><a id="references"></a></p>
 <h2 id="références">Références</h2>
 <p><em>Verlet integration</em><br>
 <a href="https://en.wikipedia.org/wiki/Verlet_integration">https://en.wikipedia.org/wiki/Verlet_integration</a></p>
