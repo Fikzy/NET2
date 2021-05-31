@@ -31,7 +31,17 @@
 <li><a href="#tools">Outils utilisés</a></li>
 <li><a href="#references">Références</a></li>
 </ol>
-<p><a id="euler-integration"></a></p>
+<h2 id="petite-mise-en-bouche">Petite mise en bouche</h2>
+
+<table>
+<thead>
+<tr>
+<th><img src="http://archive.gamedev.net/images.gamedev.net/features/programming/verlet/sandbox_3.gif" alt="sandbox_3"></th>
+<th><img src="http://archive.gamedev.net/images.gamedev.net/features/programming/verlet/sandbox_4.gif" alt="sandbox_4"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p><a id="euler-integration"></a></p>
 <h2 id="intégration-deuler">Intégration d’Euler</h2>
 <p>La majorité des moteurs de jeux qui offrent de l’interaction physique font appel à l’intégration d’Euler qui est une méthode numérique de résolution d’équations différentielles du premier ordre.</p>
 <p>L’implémentation rudimentaire consiste à, pour chaque objet, attribuer une position, vitesse et accélération, et à chaque itération de la simulation, ajouter la vitesse à la position et l’accélération à la vitesse.</p>
@@ -62,7 +72,7 @@
 <p>Les moteurs de simulation physique utilisent un système de particules.<br>
 L’utilisation de la méthode de Verlet rend cette implémentation relativement simple.</p>
 <p>Voici un premier rendu avec le traçage d’une unique particule auquel on a appliqué de la gravité et une “vélocité” initiale. À noter que pour empêcher la particule de sortir de la zone, une simple contrainte [min, max] sur ses coordonnées suffit.<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/simple_particle.png" alt="simple_particle" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/simple_particle.png" alt="simple_particle" width="405" height="430"></p>
 <p>Là où les choses deviennent intéressante, c’est lors de l’ajout de contraintes entre les particules.</p>
 <p><a id="stick-constraint"></a></p>
 <h3 id="contrainte-bâton">Contrainte bâton</h3>
@@ -77,10 +87,10 @@ p1 -= delta * ratio / 2
 p2 += delta * ratio / 2
 </code></pre>
 <p>Voici un rendu d’une simple contrainte entre deux particules : un joli bâton !<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/stick_constraint.gif" alt="stick gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/stick_constraint.gif" alt="stick gif" width="405" height="430"></p>
 <p>L’avantage de cette approche que l’on constate immédiatement est qu’aucun traitement particulier n’est nécessaire pour la rotation !</p>
 <p>En mettant bout à bout plusieurs de ces contraintes : une chaîne !<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/chain.gif" alt="chain gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/chain.gif" alt="chain gif" width="405" height="430"></p>
 <p><a id="rigid-body"></a></p>
 <h2 id="modèle-du-solide-indéformable-rigid-body">Modèle du solide indéformable (Rigid body)</h2>
 <p>Comme dit précédemment, avec ce type de contrainte, nous sommes en mesure de créer des formes géométriques.</p>
@@ -88,7 +98,7 @@ p2 += delta * ratio / 2
 <blockquote>
 <p>Ce regroupement permettra de manipuler les pièces individuellement, ce qui va s’avérer pratique comme nous allons bientôt le voir.</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/squishy_triangle.gif" alt="soft triangle gif" width="400" height="400"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/squishy_triangle.gif" alt="soft triangle gif" width="405" height="430"></p>
 <p>Cependant ici quelque chose ne va pas. La pièce ne semble pas rigide !</p>
 <p>Le soucis est que les contraintes ne sont pas résolues assez rapidement, ce qui donne cette impression de “mou”. Pour contrer ce problème, il suffit alors de résoudre les contraintes plusieurs fois par itération. Cela a évidemment un coût, mais en général un petit nombre d’itérations suffit amplement.</p>
 <pre><code>update()
@@ -97,23 +107,23 @@ p2 += delta * ratio / 2
 		resolveConstraints()
 </code></pre>
 <p>Voici le même triangle, avec 3 itérations pour la résolution de contraintes :<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle.gif" alt="rigid triangle gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle.gif" alt="rigid triangle gif" width="405" height="430"></p>
 <p>Essayons maintenant avec plus de points, trivial non ?<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes_with_no_supports.gif" alt="shapes with no supports gif" width="400" height="400"><br>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes_with_no_supports.gif" alt="shapes with no supports gif" width="405" height="430"><br>
 <img src="https://raw.githubusercontent.com/Fikzy/NET2/master/ah.gif" alt="ah gif"></p>
 <blockquote>
 <p>Peut être pas si simple…</p>
 </blockquote>
 <p>En réalité, il suffit d’ajouter des “supports”  qui ne sont rien d’autres que des contraintes bâtons placées stratégiquement au sein de l’objet !</p>
 <p>Les voici affichées en couleur pour mieux comprendre :<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes_with_visible_supports.gif" alt="shapes with visible support gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes_with_visible_supports.gif" alt="shapes with visible support gif" width="405" height="430"></p>
 <p>Pour obtenir l’illusion parfaite, il suffit alors de ne pas les afficher :<br>
 (nous pouvons ignorer les particules aussi au passage)<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes.gif" alt="final shapes gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/shapes.gif" alt="final shapes gif" width="405" height="430"></p>
 <p><a id="collision"></a></p>
 <h3 id="collision">Collision</h3>
 <p>Hum Houston, il y a un petit problème là je crois…<br>
-<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/no_collision.gif" alt="no collision gif" width="400" height="400"></p>
+<img src="https://raw.githubusercontent.com/Fikzy/NET2/master/no_collision.gif" alt="no collision gif" width="405" height="430"></p>
 <p>Cette méthode n’est pas non plus magique, il faut gérer la collision entre pièces !</p>
 <blockquote>
 <p>Le papier originel explique vaguement comment résoudre les collision, mais je n’ai pas été en mesure de l’implémenter.<br>
@@ -175,12 +185,12 @@ q1 -= peneration * 0.5 * (1 - t2)
 q2 -= peneration * 0.5 * t2
 </code></pre>
 <p>Et après plusieurs heures à se taper la tête contre un mur : TADA !</p>
-<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle_collision.gif" alt="triangle collision gif" width="400" height="400"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/triangle_collision.gif" alt="triangle collision gif" width="405" height="430"></p>
 <p><a id="final-results"></a></p>
 <h3 id="résultats-finaux">Résultats finaux</h3>
 <p>Après l’ajout d’un simple système d’interaction avec les objets, les choses deviennent d’autant plus amusantes.</p>
-<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_1.gif" alt="sandbox 1 gif" width="400" height="400"></p>
-<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="400" height="400"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_1.gif" alt="sandbox 1 gif" width="405" height="430"></p>
+<p><img src="https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_2.gif" alt="sandbox 2 gif" width="405" height="430"></p>
 <p>Les possibilités sont infinies. D’autres types de contraintes existent. Je vous recommande fortement d’essayer par vous même si cela vous a plu !</p>
 <p><a id="tools"></a></p>
 <h2 id="outils-utilisés">Outils utilisés</h2>
