@@ -6,5 +6,5 @@ Full article : https://fikzy.github.io/NET2/
 
 Preview:
 
-| ![sandbox_3](https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_3.gif) | ![sandbox_4](https://raw.githubusercontent.com/Fikzy/NET2/master/sandbox_4.gif) |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ![sandbox_3](https://raw.githubusercontent.com/Fikzy/NET2/master/gifs/sandbox_3.gif) | ![sandbox_4](https://raw.githubusercontent.com/Fikzy/NET2/master/gifs/sandbox_4.gif) |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
